@@ -6,16 +6,19 @@ import styles from "../styles/Home.module.css";
 import { MediaQueryKey } from "../styles/media";
 import { useAppSelector, useAppDispatch } from "src/state/reduxHooks";
 import {
-  selectors as dummySelector,
-  actions as DummyActions,
-} from "src/state/dummy";
+  selectors as persistDummySelector,
+  actions as persistDummyActions,
+} from "src/state/persistDummy";
 import Link from "next/link";
+import { ChangeEvent } from "react";
 
-const Home: NextPage = () => {
-  const dummyData = useAppSelector(dummySelector.selectDummyData);
+const Second: NextPage = () => {
+  const persistData = useAppSelector(
+    persistDummySelector.selectPersistDummyData
+  );
   const dispatch = useAppDispatch();
-  const onChangeInput = (val: string) => {
-    dispatch(DummyActions.setDummy(val));
+  const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch(persistDummyActions.setPersistDummy(e.target.value));
   };
   return (
     <div
@@ -32,21 +35,16 @@ const Home: NextPage = () => {
           ${theme.fontSize.std1}
         `}
       >
-        {dummyData}
+        {persistData}
       </span>
       <br />
-      <input
-        type={"text"}
-        onChange={(e) => {
-          onChangeInput(e.target.value);
-        }}
-      ></input>
+      <input type={"text"} onChange={onChangeInput}></input>
       <br />
-      <Link href="/second">
-        <a> to second</a>
+      <Link href="/">
+        <a> to home</a>
       </Link>
     </div>
   );
 };
 
-export default Home;
+export default Second;
