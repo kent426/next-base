@@ -8,6 +8,7 @@ import { useAppSelector, useAppDispatch } from "src/state/reduxHooks";
 import {
   selectors as persistDummySelector,
   actions as persistDummyActions,
+  sagaActions as persistDummySagaActions,
 } from "src/state/persistDummy";
 import Link from "next/link";
 import { ChangeEvent } from "react";
@@ -18,7 +19,7 @@ const Second: NextPage = () => {
   );
   const dispatch = useAppDispatch();
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatch(persistDummyActions.setPersistDummy(e.target.value));
+    dispatch(persistDummySagaActions.setProcess(e.target.value));
   };
   return (
     <div

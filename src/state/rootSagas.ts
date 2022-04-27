@@ -1,10 +1,11 @@
 import { all } from "redux-saga/effects";
 
-// import loginSaga from "./login/loginSaga";
+import { persistDummySagas } from "./persistDummy/sagas";
 
 export default function* sagas() {
   yield all([
     //
     // ...loginSaga,
+    ...persistDummySagas,
   ]);
 }
